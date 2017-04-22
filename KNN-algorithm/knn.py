@@ -5,7 +5,7 @@
 #Among k neighbours the maximum number of class label is 
 #accepted as predicted class label. 
 
-#NOTE: The following code is wtitten for IRIS-DATA only.
+# NOTE: The following code is wtitten for IRIS-DATA only.
 
 import csv
 import math
@@ -58,25 +58,27 @@ def getAccuracy(testset, prediction):
 			correct = correct + 1
 	return (correct/float(len(testset))) * 100.0
 
+def main():
+	#prepare data
+	trainset=[]
+	testset=[]
+	loadDataset('iris-train.data',trainset)
+	loadDataset('iris-test.data',testset)
+	print 'Train Set: ' + repr(len(trainset))
+	print 'Test Set: ' + repr(len(testset))
+	#print trainset
+	#print testset
 
-#prepare data
-trainset=[]
-testset=[]
-loadDataset('iris-train.data',trainset)
-loadDataset('iris-test.data',testset)
-print 'Train Set: ' + repr(len(trainset))
-print 'Test Set: ' + repr(len(testset))
-#print trainset
-#print testset
+	#generate predictions
+	prediction = []
+	k = 3 #we will consider 3 nearest neighbour
+	for x in range(len(testset)):
+		neighbours = getNeighbours(trainset,testset[x],k)
+		result = getResponse(neighbours)
+		prediction.append(result)
+		print('>predicted=' + repr(result) + ', actual= ' + repr(testset[x][-1]))
+	accuracy = getAccuracy(testset,prediction)
+	print('Accuracy: ' + repr(accuracy) + '%')
 
-#generate predictions
-prediction = []
-k = 3 #we will consider 3 nearest neighbour
-for x in range(len(testset)):
-	neighbours = getNeighbours(trainset,testset[x],k)
-	result = getResponse(neighbours)
-	prediction.append(result)
-	print('>predicted=' + repr(result) + ', actual= ' + repr(testset[x][-1]))
-accuracy = getAccuracy(testset,prediction)
-print('Accuracy: ' + repr(accuracy) + '%')
+main()
 
