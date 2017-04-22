@@ -80,5 +80,6 @@ def main():
 	accuracy = getAccuracy(testset,prediction)
 	print('Accuracy: ' + repr(accuracy) + '%')
 
-main()
+if __name__ == '__main__':	
+	main()
 
