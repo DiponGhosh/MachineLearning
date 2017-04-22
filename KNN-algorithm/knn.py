@@ -5,7 +5,7 @@
 #Among k neighbours the maximum number of class label is 
 #accepted as predicted class label. 
 
-# NOTE: The following code is wtitten for IRIS-DATA only.
+#NOTE: The following code is wtitten for IRIS-DATA only.
 
 import csv
 import math
